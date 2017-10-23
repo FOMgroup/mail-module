@@ -29,9 +29,10 @@ public interface YandexAPI {
     Call<Void> editMailbox(@Header("PddToken") String token,
                            @FieldMap Map<String, String> request);
 
-    @POST("/api2/admin/email/delete")
+    @POST("/api2/admin/email/del")
     @FormUrlEncoded
     Call<Void> deleteMailbox(@Header("PddToken") String token,
+                             @Field("domain") String domain,
                              @Field("login") String email);
 
     public static final YandexAPI retrofit = new Retrofit.Builder()

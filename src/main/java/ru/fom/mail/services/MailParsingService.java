@@ -6,9 +6,9 @@ import org.jsoup.nodes.Document;
 import javax.mail.Message;
 import javax.mail.internet.MimeMultipart;
 
-public class MailParsingService {
+class MailParsingService {
 
-    public Document parseEmail(Message message) {
+    public static Document parseEmail(Message message) {
         Document result = null;
         try {
             if (message.getContentType().contains("multipart")) {

@@ -1,9 +1,20 @@
 package ru.fom.mail.dictionaries;
 
-public class Provider {
+public enum Provider {
 
-    public static final String YANDEX = "imap.yandex.ru";
-    public static final String GMAIL = "imap.gmail.com";
-    public static final String MAIL = "imap.mail.ru";
+    YANDEX("imap.yandex.ru"),
+    GMAIL("imap.gmail.com"),
+    MAIL_RU("imap.mail.ru");
+
+    private final String value;
+
+    Provider(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return this.value;
+    }
 
 }
