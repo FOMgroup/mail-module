@@ -53,3 +53,22 @@ Code example:
     }
     
 ```
+
+To add this library in your project:
+
+``` maven
+
+    <repositories>
+        <repository>
+            <id>bintray-fom-test-utils</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/fom/test-utils</url>
+        </repository>
+    </repositories>
+    
+    <dependency>
+          <groupId>ru.fom.mail</groupId>
+          <artifactId>mail-module</artifactId>
+          <version>1.0.1</version>
+    </dependency>
+```
