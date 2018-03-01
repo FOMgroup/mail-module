@@ -140,18 +140,16 @@ public class MailService {
 
     private Message getRawEmail(String folderName, SearchTerm criteria) {
         final Session session = Session.getInstance(System.getProperties(), null);
-        Message result = null;
         try {
             final Store store = session.getStore(protocol);
             store.connect(provider, userEmail, userPass);
             final Folder inbox = store.getFolder(folderName);
             inbox.open(READ_ONLY);
             final Message[] found = inbox.search(criteria);
-            result = found.length > 0 ? found[0] : null;
+            return found.length > 0 ? found[0] : null;
         } catch (Exception e) {
-            e.printStackTrace();
+            return null;
         }
-        return result;
     }
 
 }

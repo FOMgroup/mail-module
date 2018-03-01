@@ -8,7 +8,7 @@ import javax.mail.internet.MimeMultipart;
 
 class MailParsingService {
 
-    public static Document parseEmail(Message message) {
+    public static synchronized Document parseEmail(Message message) {
         Document result = null;
         try {
             if (message.getContentType().contains("multipart")) {
