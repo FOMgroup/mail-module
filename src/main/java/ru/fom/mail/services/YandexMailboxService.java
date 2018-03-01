@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ru.fom.mail.rest.YandexAPI.retrofit;
 import static ru.fom.mail.dictionaries.Provider.YANDEX;
+import static ru.fom.mail.rest.YandexAPI.retrofit;
 
 public class YandexMailboxService implements MailboxService {
 

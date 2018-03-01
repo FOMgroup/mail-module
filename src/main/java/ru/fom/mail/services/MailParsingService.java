@@ -17,9 +17,7 @@ class MailParsingService {
             } else {
                 result = Jsoup.parse(message.getContent().toString());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {}
         return result;
     }
 

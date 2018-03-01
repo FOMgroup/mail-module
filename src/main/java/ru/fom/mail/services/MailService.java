@@ -6,26 +6,29 @@ import org.jsoup.nodes.Document;
 import ru.fom.mail.dictionaries.Provider;
 
 import javax.mail.*;
-import javax.mail.search.*;
+import javax.mail.search.AndTerm;
+import javax.mail.search.BodyTerm;
+import javax.mail.search.SearchTerm;
+import javax.mail.search.SubjectTerm;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static javax.mail.Folder.READ_ONLY;
 import static java.util.concurrent.TimeUnit.SECONDS;
+import static javax.mail.Folder.READ_ONLY;
 import static ru.fom.mail.services.MailParsingService.parseEmail;
 
 public class MailService {
 
     private static final String protocol = "imaps";
     private static final int maxAttempts = System.getProperty("mail.max_attempts") != null ?
-            Integer.parseInt(System.getProperty("mail.max_attempts")) : 60;
+            Integer.parseInt(System.getProperty("mail.max_attempts")) : 10;
 
     private static final RetryPolicy retryPolicy = new RetryPolicy()
             .retryWhen(null)
             .retryOn(NullPointerException.class)
             .retryOn(AuthenticationFailedException.class)
-            .withBackoff(1, 10, SECONDS)
+            .withDelay(6, SECONDS)
             .withMaxRetries(maxAttempts);
 
     private String provider, userEmail, userPass;
