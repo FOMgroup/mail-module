@@ -24,7 +24,8 @@ public class MailService {
     private static final RetryPolicy retryPolicy = new RetryPolicy()
             .retryWhen(null)
             .retryOn(NullPointerException.class)
-            .withDelay(1, SECONDS)
+            .retryOn(AuthenticationFailedException.class)
+            .withBackoff(1, 10, SECONDS)
             .withMaxRetries(maxAttempts);
 
     private String provider, userEmail, userPass;
@@ -51,16 +52,13 @@ public class MailService {
 
     public List<Message> getAllRawEmails(String folderName) {
         final Session session = Session.getInstance(System.getProperties(), null);
-        List<Message> result = null;
         try {
             final Store store = session.getStore(protocol);
             store.connect(provider, userEmail, userPass);
             final Folder inbox = store.getFolder(folderName);
             inbox.open(READ_ONLY);
-            result = inbox.getMessages().length > 0 ? Arrays.asList(inbox.getMessages()) : null;
-            return result;
+            return inbox.getMessages().length > 0 ? Arrays.asList(inbox.getMessages()) : null;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
